@@ -43,3 +43,13 @@ test('check links in the footer', async ({ page }) => {
     await expect(social.locator(`a[href*="${item}"]`)).toBeVisible();
   }
 });
+
+test('FAQ question opens the answer', async ({ page }) => {
+  const faqQuestion = page.getByRole('button', { name: "What is the Seeker's Store?" });
+  const faqAnswer = page.getByText(
+    "The Seeker's Store is the official online store selling goods for the game Seekers Notes.",
+  );
+  await expect(faqAnswer).toBeHidden();
+  await faqQuestion.click();
+  await expect(faqAnswer).toBeVisible();
+});
